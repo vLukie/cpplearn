@@ -12,3 +12,4 @@ void SelectSort(int *a, int n);              // 选择排序
 void HeapSort(int *a, int n);                // 堆排序
 void BubbleSort(int *a, int n);              // 冒泡排序
 void QuickSort(int *a, int left, int right); // 快速排序
+void MergeSort(int *a, int n);               // 归并排序

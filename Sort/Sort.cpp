@@ -1,4 +1,5 @@
 #include "Sort.h"
+#include "Stack.h"
 void Swap(int *a, int *b)
 {
     int t = *a;
@@ -234,18 +235,47 @@ int PartSort3(int *a, int left, int right) // 快速排序 前后指针法
     keyi = prev;
     return keyi;
 }
-void QuickSort(int *a, int left, int right) // 快速排序 挖坑法
-{
-    if (left >= right)
-        return;
+// void QuickSort(int *a, int left, int right) // 快速排序 挖坑法
+// {
+//     if (left >= right)
+//         return;
 
-    // 小区间优化
-    if ((right - left + 1) > 10)
+//     // 小区间优化
+//     if ((right - left + 1) > 10)
+//     {
+//         int keyi = PartSort3(a, left, right);
+//         QuickSort(a, left, keyi - 1);
+//         QuickSort(a, keyi + 1, right);
+//     }
+//     else
+//         InsertSort(a + left, right - left + 1);
+// }
+void QuickSort(int *a, int left, int right) // 快速排序 非递归
+{
+    ST st;
+    STInit(&st);
+    STPush(&st, right);
+    STPush(&st, left);
+
+    while (!STEmpty(&st))
     {
-        int keyi = PartSort3(a, left, right);
-        QuickSort(a, left, keyi - 1);
-        QuickSort(a, keyi + 1, right);
+        int begin = STTop(&st);
+        STPop(&st);
+        int end = STTop(&st);
+        STPop(&st);
+
+        int keyi = PartSort3(a, begin, end);
+        if (keyi + 1 < end)
+        {
+            STPush(&st, end);
+            STPush(&st, keyi + 1);
+        }
+        if (begin < end)
+        {
+            STPush(&st, keyi - 1);
+            STPush(&st, begin);
+        }
     }
-    else
-        InsertSort(a + left, right - left + 1);
+
+    STDestroy(&st);
 }

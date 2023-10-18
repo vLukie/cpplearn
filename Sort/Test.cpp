@@ -1,4 +1,5 @@
 #include "Sort.h"
+#include"Stack.h"
 
 int main()
 {
@@ -53,9 +54,14 @@ int main()
     int begin6 = clock();
     QuickSort(a6, 0, N - 1);
     int end6 = clock();
-
     printf("QuickSort: %d\n", end6 - begin6);
     printf("isright6: %d\n", isright(a6, N));
+
+    int begin7 = clock();
+    //MergeSort(a6, 0, N - 1);
+    int end7 = clock();
+    printf("MergeSort: %d\n", end7 - begin7);
+    printf("isright7: %d\n", isright(a6, N));
 
     free(a1);
     free(a2);
