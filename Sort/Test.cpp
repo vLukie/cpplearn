@@ -3,7 +3,7 @@
 int main()
 {
     srand(time(0));
-    const int N = 10000000;
+    const int N = 1000000;
     int *a1 = (int *)malloc(N * sizeof(int));
     int *a2 = (int *)malloc(N * sizeof(int));
     int *a3 = (int *)malloc(N * sizeof(int));

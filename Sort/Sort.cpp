@@ -173,32 +173,73 @@ void BubbleSort(int *a, int n) // 冒泡排序
 //     QuickSort(a, keyi + 1, end);
 // }
 
-void QuickSort(int *a, int left, int right) // 快速排序
+int PartSort1(int *a, int left, int right) // 快速排序 Hoera
 {
-    if (left >= right)
-        return;
-    int begin = left, end = right;
-    // int randi = rand() % (right - left) + left;
-    // Swap(&a[randi], &a[left]);
+    int midi = GetMidNumi(a, left, right);
+    if (midi != left)
+        Swap(&a[left], &a[midi]);
+    int keyi = left;
+    while (left < right)
+    {
+        while (left < right && a[right] >= a[keyi])
+            right--;
+
+        while (left < right && a[left] <= a[keyi])
+            left++;
+
+        Swap(&a[left], &a[right]);
+    }
+    Swap(&a[keyi], &a[left]);
+    keyi = left;
+    return keyi;
+}
+
+int PartSort2(int *a, int left, int right) // 快速排序 挖坑法
+{
     int midi = GetMidNumi(a, left, right);
     if (midi != left)
         Swap(&a[left], &a[midi]);
 
     int key = a[left];
-    int hole=left;
+    int hole = left;
     while (left < right)
     {
         while (left < right && a[right] >= key)
             right--;
-        a[hole]=a[right];
-        hole=right;
+        a[hole] = a[right];
+        hole = right;
 
         while (left < right && a[left] <= key)
             left++;
-        a[hole]=a[left];
-        hole=left;
+        a[hole] = a[left];
+        hole = left;
     }
-    a[hole]=key;
-    QuickSort(a, begin, hole - 1);
-    QuickSort(a, hole + 1, end);
+    a[hole] = key;
+    return hole;
+}
+int PartSort3(int *a, int left, int right) // 快速排序 前后指针法
+{
+    int midi = GetMidNumi(a, left, right);
+    if (midi != left)
+        Swap(&a[left], &a[midi]);
+    int cur = left + 1, prev = left, keyi = left;
+
+    while (cur <= right)
+    {
+        if (a[cur] < a[keyi] && ++prev != cur)
+            Swap(&a[prev], &a[cur]);
+        ++cur;
+    }
+    Swap(&a[prev], &a[keyi]);
+    keyi = prev;
+    return keyi;
+}
+void QuickSort(int *a, int left, int right) // 快速排序 挖坑法
+{
+    if (left >= right)
+        return;
+    int keyi = PartSort3(a, left, right);
+    // int keyi=PartSort2(a,left,right);
+    QuickSort(a, left, keyi - 1);
+    QuickSort(a, keyi + 1, right);
 }
