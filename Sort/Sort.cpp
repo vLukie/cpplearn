@@ -238,8 +238,14 @@ void QuickSort(int *a, int left, int right) // 快速排序 挖坑法
 {
     if (left >= right)
         return;
-    int keyi = PartSort3(a, left, right);
-    // int keyi=PartSort2(a,left,right);
-    QuickSort(a, left, keyi - 1);
-    QuickSort(a, keyi + 1, right);
+
+    // 小区间优化
+    if ((right - left + 1) > 10)
+    {
+        int keyi = PartSort3(a, left, right);
+        QuickSort(a, left, keyi - 1);
+        QuickSort(a, keyi + 1, right);
+    }
+    else
+        InsertSort(a + left, right - left + 1);
 }

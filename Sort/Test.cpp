@@ -38,22 +38,22 @@ int main()
     // printf("SelectSort: %d\n", end3 - begin3);
     // printf("isright3: %d\n", isright(a3, N));
 
-    int begin4 = clock();
-    HeapSort(a4, N);
-    int end4 = clock();
-    printf("HeapSort: %d\n", end4 - begin4);
-    printf("isright4: %d\n", isright(a4, N));
-  
+    // int begin4 = clock();
+    // HeapSort(a4, N);
+    // int end4 = clock();
+    // printf("HeapSort: %d\n", end4 - begin4);
+    // printf("isright4: %d\n", isright(a4, N));
+
     // int begin5 = clock();
     // BubbleSort(a5, N);
     // int end5 = clock();
     // printf("BubbleSort: %d\n", end5 - begin5);
     // printf("isright5: %d\n", isright(a5, N));
 
-    int begin6=clock();
+    int begin6 = clock();
     QuickSort(a6, 0, N - 1);
-    int end6=clock();
-    
+    int end6 = clock();
+
     printf("QuickSort: %d\n", end6 - begin6);
     printf("isright6: %d\n", isright(a6, N));
 
