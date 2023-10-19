@@ -279,3 +279,9 @@ void QuickSort(int *a, int left, int right) // 快速排序 非递归
 
     STDestroy(&st);
 }
+
+void MergeSort(int *a, int n) // 归并排序 原始版本
+{
+
+
+}
